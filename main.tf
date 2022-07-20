@@ -32,16 +32,16 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   #  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   profile_name        = azurerm_cdn_profile.cdnwebsvc.name
-  origin_host_header = "sergiy.myportfolio.com"
+  origin_host_header  = var.origin_host_header_name
   tags                = var.default_tags
 
   # Origin
   origin {
-    name      = "adobe-portfolio"
-    host_name = "sergiy.myportfolio.com"
+    name      = var.origin_name
+    host_name = var.origin_host_name
   }
 
-  
+
   # Caching rules
   querystring_caching_behaviour = "UseQueryString"
 
@@ -118,9 +118,9 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
 # # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
 # 
 # resource "azurerm_cdn_endpoint_custom_domain" "photo38" {
-#   name            = "the38photo"
+#   name            = var.custom_host
 #   cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
-#   host_name       = "www.the38photo.com"
+#   host_name       = var.custom_host_name
 # 
 #   cdn_managed_https {
 #     certificate_type = "Dedicated"
