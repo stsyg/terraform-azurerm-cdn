@@ -13,16 +13,24 @@ resource "azurerm_resource_group" "websvc" {
   tags     = var.default_tags
 }
 
-# # Create Azure Front Door Endpoint profile
-# # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_endpoint
-# resource "azurerm_cdn_frontdoor_profile" "fdwebsvc" {
-#   name                = var.fd_endpoint_profile_name
-#   resource_group_name = azurerm_resource_group.websvc.name
-#   sku_name            = "Standard_AzureFrontDoor"
-# }
-# 
-# resource "azurerm_cdn_frontdoor_endpoint" "fdwebsvc" {
-#   name                     = var.fd_endpoint_name
-#   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.fdwebsvc.id
-#   tags                     = var.default_tags
-# }
+# Create Azure CDN Endpoint and CDN Profile
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint
+resource "azurerm_cdn_profile" "fdwebsvc" {
+  name                = var.cdn_endpoint_profile_name
+  location            = azurerm_resource_group.websvc.location
+  resource_group_name = azurerm_resource_group.websvc.name
+  sku_name            = "Standard_Microsoft"
+  tags                = var.default_tags
+}
+
+resource "azurerm_cdn_endpoint" "fdwebsvc_ep" {
+  name         = var.cdn_endpoint_name
+  location     = azurerm_resource_group.websvc.location
+  profile_name = azurerm_cdn_profile.fdwebsvc.name
+  tags         = var.default_tags
+
+  origin {
+    name      = "example"
+    host_name = "www.contoso.com"
+  }
+}

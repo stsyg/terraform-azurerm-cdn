@@ -15,14 +15,14 @@ variable "default_tags" {
   description = "Map default tags"
 }
 
-variable "fd_endpoint_profile_name" {
-  type        = string
-  default     = "the38photo"
-  description = "Name of the Front Door Endpoint profile"
-}
-
-variable "fd_endpoint_name" {
+variable "cdn_endpoint_profile_name" {
   type        = string
   default     = "mywebsitecdn"
-  description = "Name of the Front Door Endpoint"
+  description = "Name of the CDN Endpoint profile"
+}
+
+variable "cdn_endpoint_name" {
+  type        = string
+  default     = "the38photo"
+  description = "Name of the CDN Endpoint"
 }

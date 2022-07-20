@@ -1,2 +1,3 @@
-# Deployment of Azure FrontDoor and Azure CDN
+# Deployment of Azure CDN
 
+No Azure Front Door deployment, just Azure CDN
