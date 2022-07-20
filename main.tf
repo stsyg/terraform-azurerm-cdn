@@ -116,7 +116,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
 
 resource "azurerm_cdn_endpoint_custom_domain" "photo38" {
-  name            = "www.the38photo.com"
+  name            = "the38photo"
   cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
   host_name       = "www.the38photo.com"
 
