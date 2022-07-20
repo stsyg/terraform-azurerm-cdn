@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "websvc" {
 
 # Create Azure CDN Endpoint and CDN Profile
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint
-resource "azurerm_cdn_profile" "fdwebsvc" {
+resource "azurerm_cdn_profile" "cdnwebsvc" {
   name                = var.cdn_endpoint_profile_name
   location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
@@ -23,12 +23,12 @@ resource "azurerm_cdn_profile" "fdwebsvc" {
   tags                = var.default_tags
 }
 
-resource "azurerm_cdn_endpoint" "fdwebsvc_ep" {
-  name         = var.cdn_endpoint_name
-  location     = azurerm_resource_group.websvc.location
+resource "azurerm_cdn_endpoint" "cdnwebsvc" {
+  name                = var.cdn_endpoint_name
+  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
-  profile_name = azurerm_cdn_profile.fdwebsvc.name
-  tags         = var.default_tags
+  profile_name        = azurerm_cdn_profile.cdnwebsvc.name
+  tags                = var.default_tags
 
   origin {
     name      = "example"
