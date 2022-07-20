@@ -31,7 +31,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   tags                = var.default_tags
 
   origin {
-    name      = "example"
-    host_name = "www.contoso.com"
+    name      = "adobe-portfolio"
+    host_name = "www.contoso.com" # sergiy.myportfolio.com
   }
 }
