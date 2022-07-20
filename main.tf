@@ -120,7 +120,7 @@ resource "azurerm_cdn_endpoint_custom_domain" "photo38" {
   cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
   host_name       = "www.the38photo.com"
 
-  cdn_managed_https = {
+  cdn_managed_https {
     certificate_type = "Dedicated"
     protocol_type    = "ServerNameIndication"
     tls_version      = "TLS12"
