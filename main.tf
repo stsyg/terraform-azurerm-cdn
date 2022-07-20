@@ -99,7 +99,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
 
     url_path_condition {
       operator = "contains"
-      match_values = "/blog"
+      match_values = ["/blog"]
     }
     url_redirect_action {
       redirect_type = "PermanentRedirect"
