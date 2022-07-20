@@ -17,7 +17,8 @@ resource "azurerm_resource_group" "websvc" {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint
 resource "azurerm_cdn_profile" "cdnwebsvc" {
   name                = var.cdn_endpoint_profile_name
-  location            = azurerm_resource_group.websvc.location
+  location            = "Global"
+#  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   sku                 = "Standard_Microsoft"
   tags                = var.default_tags
@@ -25,7 +26,8 @@ resource "azurerm_cdn_profile" "cdnwebsvc" {
 
 resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   name                = var.cdn_endpoint_name
-  location            = azurerm_resource_group.websvc.location
+  location            = "Global"
+#  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   profile_name        = azurerm_cdn_profile.cdnwebsvc.name
   tags                = var.default_tags
