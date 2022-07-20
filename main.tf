@@ -30,13 +30,16 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   profile_name        = azurerm_cdn_profile.cdnwebsvc.name
   tags                = var.default_tags
 
+# Origin
   origin {
     name      = "adobe-portfolio"
     host_name = "sergiy.myportfolio.com"
   }
 
+# Caching rules
   querystring_caching_behaviour = "UseQueryString"
 
+# Compression
   is_compression_enabled = true
   content_types_to_compress = [
     "text/plain", 
@@ -81,4 +84,26 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     "font/opentype", 
     "image/svg+xml"
   ]
+
+# Rules engine
+  global_delivery_rule {
+    cache_expiration_action {
+      behavior = "Override"
+      duration = "00:05:00"
+    }
+  }
+
+  delivery_rule {
+    name  = "blogredirect"
+    order = 1
+
+    url_path_condition {
+      operator = "contains"
+      match_values = "/blog"
+    }
+    url_redirect_action {
+      redirect_type = "PermanentRedirect"
+      path = "/photo-locations"
+    }
+  }
 }
