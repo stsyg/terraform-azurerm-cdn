@@ -98,7 +98,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     order = 1
 
     url_path_condition {
-      operator = "contains"
+      operator = "Contains"
       match_values = ["/blog"]
     }
     url_redirect_action {
