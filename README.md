@@ -1,2 +1,2 @@
-# terraform-azurerm-cdn
-Deployment of Azure FrontDoor and CDN
+# Deployment of Azure FrontDoor and CDN
+
