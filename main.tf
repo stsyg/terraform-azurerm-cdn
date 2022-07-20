@@ -26,6 +26,7 @@ resource "azurerm_cdn_profile" "fdwebsvc" {
 resource "azurerm_cdn_endpoint" "fdwebsvc_ep" {
   name         = var.cdn_endpoint_name
   location     = azurerm_resource_group.websvc.location
+  resource_group_name = azurerm_resource_group.websvc.name
   profile_name = azurerm_cdn_profile.fdwebsvc.name
   tags         = var.default_tags
 
