@@ -28,6 +28,11 @@ variable "custom_host_name" {
   description = "Name of the custom domain"
 }
 
+variable "custom_host" {
+  type        = string
+  description = "Name of the custom host"
+}
+
 variable "origin_host_header_name" {
   type        = string
   description = "Name of the host header"
