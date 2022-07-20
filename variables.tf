@@ -22,3 +22,24 @@ variable "cdn_endpoint_name" {
   type        = string
   description = "Name of the CDN Endpoint"
 }
+
+variable "custom_host_name" {
+  type        = string
+  description = "Name of the custom domain"
+}
+
+variable "origin_host_header_name" {
+  type        = string
+  description = "Name of the host header"
+}
+
+variable "origin_name" {
+  type        = string
+  description = "Name of the origin"
+}
+
+variable "origin_host_name" {
+  type        = string
+  description = "Name of the origin host name"
+}
+
