@@ -35,5 +35,14 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     host_name = "www.contoso.com" # sergiy.myportfolio.com
   }
 
-  content_types_to_compress = true
+  content_types_to_compress = [
+    "text/plain",
+    "text/html",
+    "text/css",
+    "text/javascript",
+    "application/x-javascript",
+    "application/javascript",
+    "application/json",
+    "application/xml"
+    ]
 }
