@@ -35,6 +35,8 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     host_name = "sergiy.myportfolio.com"
   }
 
+  querystring_caching_behaviour = "UseQueryString"
+
   is_compression_enabled = true
   content_types_to_compress = [
     "text/plain", 
