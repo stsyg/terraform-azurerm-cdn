@@ -108,7 +108,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
       match_values = ["/blog"]
     }
     url_redirect_action {
-      redirect_type = "PermanentRedirect"
+      redirect_type = "Moved"
       path          = "/photo-locations"
     }
   }
