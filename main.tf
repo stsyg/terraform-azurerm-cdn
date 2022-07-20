@@ -13,81 +13,83 @@ resource "azurerm_resource_group" "websvc" {
   tags     = var.default_tags
 }
 
-# Create Azure CDN Endpoint and CDN Profile
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint
+# Create Azure CDN Profile
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_profile
 resource "azurerm_cdn_profile" "cdnwebsvc" {
-  name                = var.cdn_endpoint_profile_name
-  location            = "Global"
-#  location            = azurerm_resource_group.websvc.location
+  name     = var.cdn_endpoint_profile_name
+  location = "Global"
+  #  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   sku                 = "Standard_Microsoft"
   tags                = var.default_tags
 }
 
+# Create Azure CDN Endpoint and CDN Profile
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint
 resource "azurerm_cdn_endpoint" "cdnwebsvc" {
-  name                = var.cdn_endpoint_name
-  location            = "Global"
-#  location            = azurerm_resource_group.websvc.location
+  name     = var.cdn_endpoint_name
+  location = "Global"
+  #  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   profile_name        = azurerm_cdn_profile.cdnwebsvc.name
   tags                = var.default_tags
 
-# Origin
+  # Origin
   origin {
     name      = "adobe-portfolio"
     host_name = "sergiy.myportfolio.com"
   }
 
-# Caching rules
+  # Caching rules
   querystring_caching_behaviour = "UseQueryString"
 
-# Compression
+  # Compression
   is_compression_enabled = true
   content_types_to_compress = [
-    "text/plain", 
-    "text/html", 
-    "text/css", 
-    "text/csv", 
-    "text/js", 
+    "text/plain",
+    "text/html",
+    "text/css",
+    "text/csv",
+    "text/js",
     "text/javascript",
-    "text/richtext", 
-    "text/tab-separated-values", 
-    "text/xml", 
-    "text/x-script", 
-    "text/x-component", 
-    "text/x-java-source", 
+    "text/richtext",
+    "text/tab-separated-values",
+    "text/xml",
+    "text/x-script",
+    "text/x-component",
+    "text/x-java-source",
     "application/javascript",
     "application/json",
-    "application/eot", 
-    "application/font", 
-    "application/font-sfnt", 
-    "application/opentype", 
-    "application/otf", 
-    "application/pkcs7-mime", 
-    "application/truetype", 
-    "application/ttf", 
-    "application/vnd.ms-fontobject", 
-    "application/xhtml+xml", 
-    "application/xml", 
-    "application/xml+rss", 
+    "application/eot",
+    "application/font",
+    "application/font-sfnt",
+    "application/opentype",
+    "application/otf",
+    "application/pkcs7-mime",
+    "application/truetype",
+    "application/ttf",
+    "application/vnd.ms-fontobject",
+    "application/xhtml+xml",
+    "application/xml",
+    "application/xml+rss",
     "application/x-javascript",
-    "application/x-font-opentype", 
-    "application/x-font-truetype", 
-    "application/x-font-ttf", 
-    "application/x-httpd-cgi", 
-    "application/x-mpegurl", 
-    "application/x-opentype", 
-    "application/x-otf", 
-    "application/x-perl", 
-    "application/x-ttf", 
-    "font/eot", 
-    "font/ttf", 
-    "font/otf", 
-    "font/opentype", 
+    "application/x-font-opentype",
+    "application/x-font-truetype",
+    "application/x-font-ttf",
+    "application/x-httpd-cgi",
+    "application/x-mpegurl",
+    "application/x-opentype",
+    "application/x-otf",
+    "application/x-perl",
+    "application/x-ttf",
+    "font/eot",
+    "font/ttf",
+    "font/otf",
+    "font/opentype",
     "image/svg+xml"
   ]
 
-# Rules engine
+  # Rules engine
   global_delivery_rule {
     cache_expiration_action {
       behavior = "Override"
@@ -100,12 +102,27 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     order = 1
 
     url_path_condition {
-      operator = "Contains"
+      operator     = "Contains"
       match_values = ["/blog"]
     }
     url_redirect_action {
       redirect_type = "PermanentRedirect"
-      path = "/photo-locations"
+      path          = "/photo-locations"
     }
+  }
+}
+
+# Create Azure CDN Endpoint Custom Domain
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
+
+resource "azurerm_cdn_endpoint_custom_domain" "38photo" {
+  name            = "www.the38photo.com"
+  cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
+  host_name       = "www.the38photo.com"
+
+  cdn_managed_https = {
+    certificate_type = "Dedicated"
+    protocol_type = "ServerNameIndication"
+    tls_version = "TLS12"
   }
 }
