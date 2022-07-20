@@ -32,11 +32,10 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
 
   origin {
     name      = "adobe-portfolio"
-    host_name = "www.contoso.com" # sergiy.myportfolio.com
+    host_name = "sergiy.myportfolio.com"
   }
 
   is_compression_enabled = true
-
   content_types_to_compress = [
     "text/plain", 
     "text/html", 
