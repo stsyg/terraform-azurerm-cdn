@@ -32,6 +32,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   #  location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
   profile_name        = azurerm_cdn_profile.cdnwebsvc.name
+  origin_host_header = "sergiy.myportfolio.com"
   tags                = var.default_tags
 
   # Origin
@@ -40,6 +41,7 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     host_name = "sergiy.myportfolio.com"
   }
 
+  
   # Caching rules
   querystring_caching_behaviour = "UseQueryString"
 
