@@ -19,7 +19,7 @@ resource "azurerm_cdn_profile" "fdwebsvc" {
   name                = var.cdn_endpoint_profile_name
   location            = azurerm_resource_group.websvc.location
   resource_group_name = azurerm_resource_group.websvc.name
-  sku_name            = "Standard_Microsoft"
+  sku                 = "Standard_Microsoft"
   tags                = var.default_tags
 }
 
