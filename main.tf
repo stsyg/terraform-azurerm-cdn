@@ -13,16 +13,16 @@ resource "azurerm_resource_group" "websvc" {
   tags     = var.default_tags
 }
 
-# Create Azure Front Door Endpoint profile
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_endpoint
-resource "azurerm_cdn_frontdoor_profile" "fdwebsvc" {
-  name                = var.fd_endpoint_profile_name
-  resource_group_name = azurerm_resource_group.websvc.name
-  sku_name            = "Standard_AzureFrontDoor"
-}
-
-resource "azurerm_cdn_frontdoor_endpoint" "fdwebsvc" {
-  name                     = var.fd_endpoint_name
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.fdwebsvc.id
-  tags                     = var.default_tags
-}
+# # Create Azure Front Door Endpoint profile
+# # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_endpoint
+# resource "azurerm_cdn_frontdoor_profile" "fdwebsvc" {
+#   name                = var.fd_endpoint_profile_name
+#   resource_group_name = azurerm_resource_group.websvc.name
+#   sku_name            = "Standard_AzureFrontDoor"
+# }
+# 
+# resource "azurerm_cdn_frontdoor_endpoint" "fdwebsvc" {
+#   name                     = var.fd_endpoint_name
+#   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.fdwebsvc.id
+#   tags                     = var.default_tags
+# }
