@@ -114,17 +114,17 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
   }
 }
 
-# # Create Azure CDN Endpoint Custom Domain
-# # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
-# 
-# resource "azurerm_cdn_endpoint_custom_domain" "photo38" {
-#   name            = var.custom_host
-#   cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
-#   host_name       = var.custom_host_name
-# 
-#   cdn_managed_https {
-#     certificate_type = "Dedicated"
-#     protocol_type    = "ServerNameIndication"
-#     tls_version      = "TLS12"
-#   }
-# }
+# Create Azure CDN Endpoint Custom Domain
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
+
+resource "azurerm_cdn_endpoint_custom_domain" "photo38" {
+  name            = var.custom_host
+  cdn_endpoint_id = azurerm_cdn_endpoint.cdnwebsvc.id
+  host_name       = var.custom_host_name
+
+  cdn_managed_https {
+    certificate_type = "Dedicated"
+    protocol_type    = "ServerNameIndication"
+    tls_version      = "TLS12"
+  }
+}
