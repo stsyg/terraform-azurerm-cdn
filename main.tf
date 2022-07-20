@@ -34,4 +34,6 @@ resource "azurerm_cdn_endpoint" "cdnwebsvc" {
     name      = "adobe-portfolio"
     host_name = "www.contoso.com" # sergiy.myportfolio.com
   }
+
+  content_types_to_compress = true
 }
