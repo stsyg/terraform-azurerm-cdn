@@ -11,4 +11,7 @@ Before deleting CDN Endpoint, the associated CNAME needs to be deleted. The foll
 
 "Cannot delete custom domain "www.abc.com" because it is still directly or indirectly (using "cdnverify" prefix) CNAMEd to CDN endpoint "the38photo.azureedge.net". Please remove the DNS CNAME record and try again."
 
-Note: do not forget to return CNAME record to the DNS after CDN Endpoint creation
+Note: do not forget to return CNAME record to the DNS before CDN Endpoint creation
+
+To-Do:
+- Move DNS record registration to Azure DNS
