@@ -1,6 +1,6 @@
 # Deployment of Azure CDN
 
-No Azure Front Door deployment. 
+No Azure Front Door deployment. Just Azure CDN.
 
 The following resources will be created:
 - Azure CDN
